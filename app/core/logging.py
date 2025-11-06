@@ -1,0 +1,30 @@
+import logging
+from logging.config import dictConfig
+from .config import settings
+
+
+def setup_logging() -> None:
+    """Register the default logging configuration."""
+
+    config = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "default": {
+                "format": "%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+            }
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "default",
+            }
+        },
+        "root": {
+            "handlers": ["console"],
+            "level": settings.log_level,
+        },
+    }
+    dictConfig(config)
+    logging.getLogger(__name__).debug("Logging configured with level %s", settings.log_level)
+
