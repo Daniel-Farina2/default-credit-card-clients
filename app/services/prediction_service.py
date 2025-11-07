@@ -114,7 +114,7 @@ class PredictionService:
         if extension == ".csv":
             return pd.read_csv(io.BytesIO(file_bytes))
         if extension == ".xls":
-            return pd.read_excel(io.BytesIO(file_bytes))
+            return pd.read_excel(io.BytesIO(file_bytes), header=1)
         raise PredictionError("Only CSV and XLS files are supported.")
 
 

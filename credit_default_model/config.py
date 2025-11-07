@@ -24,17 +24,17 @@ class ModelSettings(BaseModel):
         description="Directory containing serialized model artifacts.",
     )
     model_filename: str = Field(
-        default=os.getenv("MODEL_FILENAME", "rf_model_v0.1.0.pkl"),
+        default=os.getenv("MODEL_FILENAME", "cat_model_v1.0.0.pkl"),
         description="Cloudpickle artifact that stores the trained estimator.",
     )
     input_signature_filename: str = Field(
         default=os.getenv(
-            "MODEL_SIGNATURE", "rf_model_v0.1.0_input_signature.json"
+            "MODEL_SIGNATURE", "cat_model_v1.0.0_input_signature.json"
         ),
         description="JSON file describing required input schema.",
     )
     metadata_filename: str = Field(
-        default=os.getenv("MODEL_METADATA", "rf_model_v0.1.0_metadata.json"),
+        default=os.getenv("MODEL_METADATA", "cat_model_v1.0.0_metadata.json"),
         description="JSON file containing metadata (metrics, threshold).",
     )
     id_column_name: str = Field(

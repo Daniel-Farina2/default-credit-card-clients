@@ -1,2 +1,24 @@
 # default-credit-card-clients
-This repository contains a machine learning model trained on the Taiwan default payment dataset to predict the likelihood of customer default. It includes both an API and a GUI for easy interaction.
+Predicts credit-card default risk with a FastAPI backend and Streamlit UI.
+
+## Generate the model notebook
+1. `pip install -r requirements.txt`
+2. Open `notebooks/eda_and_training.ipynb`, run all cells, to export the model artifacts to `models/`.
+
+## Run with uvicorn + Streamlit
+```bash
+uvicorn app.main:app --reload
+streamlit run streamlit_app/streamlit_app.py
+```
+
+## Run with Docker
+```bash
+docker build -t default-credit:latest .
+docker run --rm -it -p 8000:8000 default-credit:latest
+streamlit run streamlit_app/streamlit_app.py
+```
+
+## Test the routes
+```bash
+pytest -v
+```

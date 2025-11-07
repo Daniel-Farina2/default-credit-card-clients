@@ -1,9 +1,14 @@
-FROM python:3.11-slim AS api
+FROM python:3.11
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    OMP_NUM_THREADS=1
 
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgomp1 libstdc++6 \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -13,9 +18,9 @@ COPY credit_default_model ./credit_default_model
 COPY models ./models
 
 ENV MODEL_DIR=/app/models \
-    MODEL_FILENAME=rf_model_v0.1.0.pkl \
-    MODEL_SIGNATURE=rf_model_v0.1.0_input_signature.json \
-    MODEL_METADATA=rf_model_v0.1.0_metadata.json
+    MODEL_FILENAME=cat_model_v1.0.0.pkl \
+    MODEL_SIGNATURE=cat_model_v1.0.0_input_signature.json \
+    MODEL_METADATA=cat_model_v1.0.0_metadata.json
 
 EXPOSE 8000
 
